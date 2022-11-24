@@ -13,6 +13,7 @@ router.put("/api/client/:id", clientController.updateClient);
 //Orders routes
 router.get("/api/order", orderController.getAll);
 router.post("/api/order", orderController.addOrder);
+router.delete("/api/order/:id", orderController.deleteOrder);
 router.put("/api/order/:id", orderController.updateOrder);
 router.get("/api/order/unfinished", orderController.getAllNotDone);
 router.get("/api/order/:id", orderController.getOrderById);
