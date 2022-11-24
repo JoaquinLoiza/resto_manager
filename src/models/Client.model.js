@@ -8,7 +8,6 @@ const ClientSchema = new Schema(
       type: Number,
       required: true,
       inmutable: true,
-      unique: true,
     },
     name: {
       type: String,
