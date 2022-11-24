@@ -1,21 +1,27 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
-const OrderSchema = new Schema({
+const OrderSchema = new Schema(
+  {
     clientId: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     menu: {
-        type: [String],
-        required: true
+      type: [Number],
+      required: true,
     },
     done: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
-}, {
+    notes: {
+      type: String,
+    },
+  },
+  {
     versionKey: false,
-    timestamps: true
-});
+    timestamps: true,
+  }
+);
 
-export default model('Order', OrderSchema);
+export default model("Order", OrderSchema);
