@@ -15,5 +15,7 @@ router.get("/api/order", orderController.getAll);
 router.post("/api/order", orderController.addOrder);
 router.put("/api/order/:id", orderController.updateOrder);
 router.get("/api/order/unfinished", orderController.getAllNotDone);
+router.get("/api/order/:id", orderController.getOrderById);
+router.get("/api/order/client/:clientId", orderController.getOrderByClient);
 
 export default router;

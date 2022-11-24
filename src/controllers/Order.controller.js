@@ -9,6 +9,37 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getOrderByClient = async (req, res) => {
+  try {
+    const orders = await OrdertModel.find({
+      clientId: req.params.clientId,
+    });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getOrderById = async (req, res) => {
+  try {
+    const orders = await OrdertModel.findById(req.params.id);
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getOrderByDay = async (req, res) => {
+  try {
+    const orders = await OrdertModel.find({
+      createdAt: req.params.createdAt,
+    });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export const addOrder = async (req, res) => {
   try {
     const newOrder = new OrdertModel({
