@@ -53,6 +53,7 @@ export const updateClient = async (req, res) => {
       req.params.id,
       req.body
     );
+    res.json({ message: "Success update" });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
