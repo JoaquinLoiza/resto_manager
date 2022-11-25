@@ -3,18 +3,31 @@ import ClientModel from "../models/Client.model";
 export const getAll = async (req, res) => {
   try {
     const clients = await ClientModel.find();
+    if(clients.length == 0) {
+      res.json({ message: "there are no clients"});
+    }
     res.json(clients);
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
+  } catch (e) {
+    res.status(500).json({ 
+      message: "Server error",
+      error: e
+   });
   }
 };
 
 export const getById = async (req, res) => {
   try {
     const client = await ClientModel.findById(req.params.id);
+
+    if(client == null) {
+      res.status(404).json({ message: "the client does not exist" });
+    }
     res.json(client);
-  } catch (error) {
-    res.status(404).json({ message: "Not found" });
+  } catch (e) {
+    res.status(500).json({ 
+      message: "Server error",
+      error: e
+   });
   }
 };
 
@@ -29,8 +42,11 @@ export const addClient = async (req, res) => {
     });
     const clientSaved = await newClient.save();
     res.json(clientSaved);
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
+  } catch (e) {
+    res.status(500).json({ 
+      message: "Server error",
+      error: e
+   });
   }
 };
 
@@ -38,12 +54,14 @@ export const deleteClient = async (req, res) => {
   try {
     const client = await ClientModel.findByIdAndDelete(req.params.id);
     if (client == null) {
-      res.status(404).json({ message: "Not found" });
-    } else {
-      res.json("the client was deleted");
+      res.status(404).json({ message: "the client does not exist" });
     }
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.json("the client was deleted");
+  } catch (e) {
+    res.status(500).json({ 
+      message: "Server error",
+      error: e
+   });
   }
 };
 
@@ -53,8 +71,14 @@ export const updateClient = async (req, res) => {
       req.params.id,
       req.body
     );
+    if (updatedClient == null) {
+      res.status(404).json({ message: "the client does not exist" });
+    }
     res.json({ message: "Success update" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
+  } catch (e) {
+    res.status(500).json({ 
+      message: "Server error",
+      error: e
+   });
   }
 };
